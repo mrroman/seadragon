@@ -19,7 +19,7 @@ public class ScoreBoard implements GameObject {
         int liveSize = (int)(size.getColumns()*0.6);
         int livePart = (int)(liveSize*app.lives/100.0);
 
-        String scorePanel = String.format("  Score: %05d", app.lives, app.score);
+        String scorePanel = String.format("  Score: %05d", app.score);
         StringBuilder sb = new StringBuilder();
         for (int i =0 ; i< liveSize; i++) {
             sb.append(' ');

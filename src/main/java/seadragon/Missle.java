@@ -43,6 +43,7 @@ public class Missle implements GameObject {
 
         if (fuel-- == 0) {
             app.removeObject(this);
+            app.score = Math.max(0, app.score - 10);
             return;
         }
 
@@ -57,7 +58,7 @@ public class Missle implements GameObject {
                     if (seaMine.getTop() == y) {
                         app.removeObject(this);
                         app.removeObject(object);
-                        app.score += 10;
+                        app.score += 20;
                         app.addObject(new Bum(x+1,y));
                     }
                 }
