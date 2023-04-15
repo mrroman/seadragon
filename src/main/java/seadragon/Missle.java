@@ -1,9 +1,9 @@
 package seadragon;
 
-import com.googlecode.lanterna.input.Key;
-import com.googlecode.lanterna.terminal.Terminal;
-
 import java.util.List;
+
+import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.input.KeyStroke;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,8 +26,8 @@ public class Missle implements GameObject {
 
     @Override
     public void draw(App app) {
-        app.screen.putString(x, y, "*", Terminal.Color.BLACK, Terminal.Color.RED);
-        app.screen.putString(x+1, y, "-", Terminal.Color.BLACK, Terminal.Color.YELLOW);
+        app.putString(x, y, "*", TextColor.ANSI.BLACK, TextColor.ANSI.RED);
+        app.putString(x+1, y, "-", TextColor.ANSI.BLACK, TextColor.ANSI.YELLOW);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class Missle implements GameObject {
     }
 
     @Override
-    public void update(App app, Key key) {
+    public void update(App app, KeyStroke key) {
         if (app.tick % 4 == 1) {
             x++;
         }

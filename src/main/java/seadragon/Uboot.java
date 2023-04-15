@@ -1,6 +1,8 @@
 package seadragon;
 
-import com.googlecode.lanterna.input.Key;
+import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.terminal.Terminal;
 
 import java.util.List;
@@ -25,8 +27,8 @@ public class Uboot implements GameObject {
 
     @Override
     public void draw(App app) {
-        app.screen.putString(x, y, UBOOT_UP, Terminal.Color.YELLOW, Terminal.Color.BLACK);
-        app.screen.putString(x, y + 1, UBOOT_DOWN, Terminal.Color.BLACK, Terminal.Color.YELLOW);
+        app.putString(x, y, UBOOT_UP, TextColor.ANSI.YELLOW, TextColor.ANSI.BLACK);
+        app.putString(x, y + 1, UBOOT_DOWN, TextColor.ANSI.BLACK, TextColor.ANSI.YELLOW);
     }
 
     @Override
@@ -35,7 +37,7 @@ public class Uboot implements GameObject {
     }
 
     @Override
-    public void update(App app, Key key) {
+    public void update(App app, KeyStroke key) {
         if (key != null) {
             handleKeys(app, key);
         }
@@ -47,20 +49,20 @@ public class Uboot implements GameObject {
         }
     }
 
-    private void handleKeys(App app, Key key) {
-        if (key.getKind() == Key.Kind.ArrowUp)  {
+    private void handleKeys(App app, KeyStroke key) {
+        if (key.getKeyType() == KeyType.ArrowUp)  {
             y = Math.max(0, y - 1);
         }
 
-        if (key.getKind() == Key.Kind.ArrowLeft)  {
+        if (key.getKeyType() == KeyType.ArrowLeft)  {
             x = Math.max(0, x - 1);
         }
 
-        if (key.getKind() == Key.Kind.ArrowDown)  {
+        if (key.getKeyType() == KeyType.ArrowDown)  {
             y = Math.min(app.screen.getTerminalSize().getRows() - 1, y + 1);
         }
 
-        if (key.getKind() == Key.Kind.ArrowRight)  {
+        if (key.getKeyType() == KeyType.ArrowRight)  {
             x = Math.min(app.screen.getTerminalSize().getColumns() - 1, x + 1);
         }
 

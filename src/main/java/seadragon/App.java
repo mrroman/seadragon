@@ -1,18 +1,20 @@
 package seadragon;
 
-import com.googlecode.lanterna.TerminalFacade;
-import com.googlecode.lanterna.input.Key;
-import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.terminal.swing.SwingTerminal;
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.googlecode.lanterna.TextCharacter;
+import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.screen.Screen;
+import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 
 /**
  * Hello world!
  *
  */
-public class App 
+public class App
 {
     public final Screen screen;
     public int position = 0;
@@ -26,8 +28,8 @@ public class App
     public final Uboot uboot;
     public final ScoreBoard scoreBoard;
 
-    public App() {
-        screen = TerminalFacade.createScreen(new SwingTerminal(80,24));
+    public App() throws IOException {
+        screen = new DefaultTerminalFactory().createScreen();
         background = new Background(screen.getTerminalSize().getRows() / 4);
         scoreBoard = new ScoreBoard();
         uboot = new Uboot(0,0);
@@ -35,7 +37,7 @@ public class App
         objects.add(uboot);
     }
 
-    public void run() {
+    public void run() throws IOException {
         screen.startScreen();
 
         while (lives > 0) {
@@ -77,7 +79,15 @@ public class App
         return collides;
     }
 
-    private void drawObjects() {
+    public void putString(int x, int y, String s, TextColor foreground, TextColor background) {
+        var chars = TextCharacter.fromString(s, foreground, background);
+
+        for (int i = 0; i < chars.length; i++) {
+            screen.setCharacter(i + x, y, chars[i]);
+        }
+    }
+
+    private void drawObjects() throws IOException {
         screen.clear();
         for (GameObject object : objects) {
             object.draw(this);
@@ -86,8 +96,8 @@ public class App
         screen.refresh();
     }
 
-    private void updateGame() {
-        Key key = screen.readInput();
+    private void updateGame() throws IOException {
+        KeyStroke key = screen.pollInput();
 
         if (key != null) {
             handleKeys(key);
@@ -99,14 +109,14 @@ public class App
         }
     }
 
-    private void handleKeys(Key key) {
+    private void handleKeys(KeyStroke key) {
         if (key.getCharacter() == 'q')  {
             lives = 0;
         }
 
     }
 
-    public static void main( String[] args ) {
+    public static void main( String[] args ) throws Exception {
         new App().run();
     }
 

@@ -1,7 +1,8 @@
 package seadragon;
 
-import com.googlecode.lanterna.input.Key;
-import com.googlecode.lanterna.terminal.Terminal;
+import com.googlecode.lanterna.TextCharacter;
+import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.input.KeyStroke;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,15 +21,19 @@ public class Bum implements GameObject {
         this.y = y;
     }
 
+    TextCharacter textCharacter = TextCharacter.fromCharacter('#',
+            TextColor.ANSI.WHITE,
+            TextColor.ANSI.YELLOW)[0];
+
     @Override
     public void draw(App app) {
         if (y-2 >= 0)
-            app.screen.putString(x,y-2, "#", Terminal.Color.WHITE, Terminal.Color.YELLOW);
+            app.screen.setCharacter(x,y-2,textCharacter);
         if (y-1 >= 0)
-            app.screen.putString(x-1,y-1, "###", Terminal.Color.WHITE, Terminal.Color.YELLOW);
-        app.screen.putString(x-2,y, "#####", Terminal.Color.WHITE, Terminal.Color.YELLOW);
-        app.screen.putString(x-1,y+1, "###", Terminal.Color.WHITE, Terminal.Color.YELLOW);
-        app.screen.putString(x,y+2, "#", Terminal.Color.WHITE, Terminal.Color.YELLOW);
+            app.putString(x-1,y-1, "###", TextColor.ANSI.WHITE, TextColor.ANSI.YELLOW);
+        app.putString(x-2,y, "#####", TextColor.ANSI.WHITE, TextColor.ANSI.YELLOW);
+        app..putString(x-1,y+1, "###", TextColor.ANSI.WHITE, TextColor.ANSI.YELLOW);
+        app.putString(x,y+2, "#", TextColor.ANSI.WHITE, TextColor.ANSI.YELLOW);
     }
 
     @Override
@@ -37,7 +42,7 @@ public class Bum implements GameObject {
     }
 
     @Override
-    public void update(App app, Key key) {
+    public void update(App app, KeyStroke key) {
         if (time-- == 0) {
             app.removeObject(this);
         }

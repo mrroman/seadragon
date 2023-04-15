@@ -1,10 +1,10 @@
 package seadragon;
 
-import com.googlecode.lanterna.input.Key;
-import com.googlecode.lanterna.terminal.Terminal;
-import com.googlecode.lanterna.terminal.TerminalSize;
-
 import java.util.Arrays;
+
+import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.input.KeyStroke;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,11 +31,11 @@ public class SeaMine implements GameObject {
     @Override
     public void draw(App app) {
         if (isVisible(app)) {
-            app.screen.putString(x - app.position, y1, "@", Terminal.Color.BLACK, Terminal.Color.BLUE);
+            app.putString(x - app.position, y1, "@", TextColor.ANSI.BLACK, TextColor.ANSI.BLUE);
 
             if (y1 < y2) {
                 for (int i = y1+1; i < y2; i++) {
-                    app.screen.putString(x - app.position, i, "|", Terminal.Color.BLUE, Terminal.Color.BLACK);
+                    app.putString(x - app.position, i, "|", TextColor.ANSI.BLUE, TextColor.ANSI.BLACK);
                 }
             }
         }
@@ -62,7 +62,7 @@ public class SeaMine implements GameObject {
     }
 
     @Override
-    public void update(App app, Key key) {
+    public void update(App app, KeyStroke key) {
 
     }
 

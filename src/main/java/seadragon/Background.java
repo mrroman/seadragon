@@ -1,13 +1,14 @@
 package seadragon;
 
-import com.googlecode.lanterna.input.Key;
-import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.terminal.Terminal;
-import com.googlecode.lanterna.terminal.TerminalSize;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
-import javax.swing.*;
-import javax.swing.table.TableColumnModel;
-import java.util.*;
+import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextCharacter;
+import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.screen.Screen;
 
 /**
  * Created with IntelliJ IDEA.
@@ -60,7 +61,7 @@ public class Background implements GameObject {
     }
 
     @Override
-    public void update(App app, Key key) {
+    public void update(App app, KeyStroke key) {
         if (random.nextInt(80) == 1) {
 
             int x = levels.size();
@@ -69,9 +70,13 @@ public class Background implements GameObject {
         }
     }
 
+    TextCharacter[] backgroundChar = TextCharacter.fromCharacter('#',
+            TextColor.ANSI.MAGENTA,
+            TextColor.ANSI.BLACK);
+
     private void drawLine(Screen screen, int x, int y1, int y2) {
         for (int i= y1; i< y2; i++) {
-            screen.putString(x, i, "#", Terminal.Color.MAGENTA, Terminal.Color.BLACK);
+            screen.setCharacter(x, i, backgroundChar[0]);
         }
     }
 }

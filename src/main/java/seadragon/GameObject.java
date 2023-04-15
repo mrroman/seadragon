@@ -1,6 +1,6 @@
 package seadragon;
 
-import com.googlecode.lanterna.input.Key;
+import com.googlecode.lanterna.input.KeyStroke;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,6 +15,6 @@ public interface GameObject {
 
     boolean collides(App app, int x1, int y1, int x2, int y2);
 
-    void update(App app, Key key);
+    void update(App app, KeyStroke key);
 
 }

@@ -1,8 +1,8 @@
 package seadragon;
 
-import com.googlecode.lanterna.input.Key;
-import com.googlecode.lanterna.terminal.Terminal;
-import com.googlecode.lanterna.terminal.TerminalSize;
+import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.input.KeyStroke;
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,10 +25,10 @@ public class ScoreBoard implements GameObject {
             sb.append(' ');
         }
 
-        app.screen.putString(0, size.getRows() - 2, "  ", Terminal.Color.WHITE, Terminal.Color.BLUE);
-        app.screen.putString(2, size.getRows() - 2, sb.substring(0, livePart), Terminal.Color.BLACK, Terminal.Color.WHITE);
-        app.screen.putString(livePart + 2, size.getRows() - 2, sb.substring(0, liveSize - livePart), Terminal.Color.BLACK, Terminal.Color.RED);
-        app.screen.putString(liveSize + 2, size.getRows() - 2, scorePanel, Terminal.Color.WHITE, Terminal.Color.BLUE);
+        app.putString(0, size.getRows() - 2, "  ", TextColor.ANSI.WHITE, TextColor.ANSI.BLUE);
+        app.putString(2, size.getRows() - 2, sb.substring(0, livePart), TextColor.ANSI.BLACK, TextColor.ANSI.WHITE);
+        app.putString(livePart + 2, size.getRows() - 2, sb.substring(0, liveSize - livePart), TextColor.ANSI.BLACK, TextColor.ANSI.RED);
+        app.putString(liveSize + 2, size.getRows() - 2, scorePanel, TextColor.ANSI.WHITE, TextColor.ANSI.BLUE);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class ScoreBoard implements GameObject {
     }
 
     @Override
-    public void update(App app, Key key) {
+    public void update(App app, KeyStroke key) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 }
